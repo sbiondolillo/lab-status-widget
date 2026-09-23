@@ -1,0 +1,87 @@
+/* The lab status widget. One line, at the size of the text around it.
+   Each variable has a default here, and a page that defines the same
+   variable overrides it. */
+
+.lab-status {
+	/* A flex row centres the light on the text, where an inline block sits
+	   on the baseline. */
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: var(--separator);
+	margin: 0;
+	color: var(--text-muted, #8b8fa8);
+	font-family: var(--font-code, ui-monospace, monospace);
+	font-size: 0.8rem;
+	--separator: 3ch;
+	/* The separator hangs in the gap to the left of the age. When the age
+	   wraps to a second row, the separator is past the left edge, and the
+	   clip hides it. The padding keeps the glow of the light inside the
+	   clip, and the margin gives the same width back. */
+	overflow-x: clip;
+	padding-left: 0.5em;
+	margin-left: -0.5em;
+}
+.lab-status[data-state='stale'] [data-count],
+.lab-status[data-state='unavailable'] [data-count] {
+	opacity: 0.55;
+}
+/* The count reads as text until the pointer is on it, and then underlines
+   like a link. */
+.lab-status .count {
+	display: inline-flex;
+	align-items: center;
+	color: inherit;
+	text-decoration: none;
+}
+.lab-status a.count:hover [data-count],
+.lab-status a.count:focus-visible [data-count] {
+	text-decoration: underline;
+	text-decoration-color: var(--accent, #9aa7ff);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+}
+.lab-status small {
+	position: relative;
+	font-size: inherit;
+}
+.lab-status small:not(:empty)::before {
+	content: '\00b7';
+	position: absolute;
+	left: calc(-1 * var(--separator));
+	width: var(--separator);
+	text-align: center;
+}
+.lab-status .light {
+	flex: none;
+	width: 0.6em;
+	height: 0.6em;
+	margin-right: 0.5em;
+	border-radius: 50%;
+	background: var(--light);
+	box-shadow: 0 0 0.5em var(--light);
+}
+.lab-status .light[data-light='grey'] {
+	--light: var(--status-grey, #5b6472);
+	box-shadow: none;
+}
+.lab-status .light[data-light='green'] {
+	--light: var(--status-green, #3fb950);
+	animation: lab-status-breathe 3s ease-in-out infinite;
+}
+.lab-status .light[data-light='yellow'] {
+	--light: var(--status-yellow, #e3b341);
+}
+.lab-status .light[data-light='red'] {
+	--light: var(--status-red, #f0524a);
+}
+@keyframes lab-status-breathe {
+	50% {
+		box-shadow: 0 0 0.15em var(--light);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.lab-status .light {
+		animation: none !important;
+	}
+}

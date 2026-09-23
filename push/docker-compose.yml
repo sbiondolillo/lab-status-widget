@@ -1,0 +1,23 @@
+# The push job. Copy .env.example to .env, fill it in, and run
+# `docker compose up -d --build`.
+#
+# It publishes no port. The Prometheus source reads Prometheus over the
+# network named below, and every source calls out to Cloudflare.
+services:
+  lab-status-push:
+    build: .
+    container_name: lab-status-push
+    restart: unless-stopped
+    # python3 as PID 1 ignores SIGTERM, and a stop then waits 10 s for the
+    # kill. An init process passes the signal on.
+    init: true
+    read_only: true
+    env_file: .env
+    # The Prometheus source needs the network that Prometheus is on. The
+    # static source needs none, so delete these three lines for it.
+    networks:
+      - observability
+
+networks:
+  observability:
+    external: true

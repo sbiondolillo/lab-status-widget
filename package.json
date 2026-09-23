@@ -1,0 +1,27 @@
+{
+	"name": "lab-status-widget",
+	"version": "1.0.0",
+	"description": "A lab status widget: a Cloudflare Worker with a KV store, a push job with a pluggable source, and a plain script that any page embeds.",
+	"type": "module",
+	"license": "MIT",
+	"author": "Sam Biondolillo",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sbiondolillo/lab-status-widget.git"
+	},
+	"files": [
+		"worker/handler.js",
+		"widget/lab-status.js",
+		"widget/lab-status.css",
+		"widget/LabStatus.astro"
+	],
+	"exports": {
+		".": "./worker/handler.js",
+		"./astro": "./widget/LabStatus.astro",
+		"./lab-status.js": "./widget/lab-status.js",
+		"./lab-status.css": "./widget/lab-status.css"
+	},
+	"scripts": {
+		"test": "node --test \"worker/*.test.js\""
+	}
+}

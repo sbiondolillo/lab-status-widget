@@ -1,0 +1,22 @@
+---
+// The widget as an Astro component. It loads the stylesheet and the script,
+// and prints the snippet. `import LabStatus from 'lab-status-widget/astro'`.
+import './lab-status.css';
+
+interface Props {
+	/** The Worker's status URL. The default is the same origin. */
+	url?: string;
+	/** The count becomes a link to this target. */
+	href?: string;
+	/** The link's title attribute. */
+	title?: string;
+}
+
+const { url = '/api/status', href, title } = Astro.props;
+---
+
+<p data-lab-status={url} data-href={href} data-title={title}></p>
+
+<script>
+	import './lab-status.js';
+</script>

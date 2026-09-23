@@ -1,0 +1,16 @@
+// The standalone Worker. Deploy it with `npx wrangler deploy`.
+//
+// Two settings live in the Cloudflare dashboard and not in this file:
+//
+// 1. The KV namespace. Make one under Storage & Databases, KV, and put its
+//    id below. An id is an identifier and not a secret.
+// 2. The secret PUSH_TOKEN, on the Worker under Settings, Variables and
+//    Secrets. Make it with `openssl rand -hex 32`. The push job sends the
+//    same value as a bearer token. A deploy keeps the secret.
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "lab-status",
+	"main": "worker/index.js",
+	"compatibility_date": "2026-09-19",
+	"kv_namespaces": [{ "binding": "STATUS", "id": "REPLACE_WITH_THE_KV_NAMESPACE_ID" }]
+}

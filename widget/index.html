@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Lab status widget</title>
+		<link rel="stylesheet" href="lab-status.css" />
+		<style>
+			body {
+				margin: 3rem;
+				background: #0f1117;
+				color: #d5d8e2;
+				font-family: system-ui, sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Lab status widget</h1>
+		<!-- The snippet. Put the Worker URL in data-lab-status. -->
+		<p data-lab-status="https://lab-status.example.workers.dev/api/status" data-href="https://example.com/how-this-works" data-title="How this widget works"></p>
+		<script src="lab-status.js" defer></script>
+	</body>
+</html>
