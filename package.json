@@ -2,6 +2,12 @@
 	"name": "lab-status-widget",
 	"version": "1.0.0",
 	"description": "A lab status widget: a Cloudflare Worker with a KV store, a push job with a pluggable source, and a plain script that any page embeds.",
+	"keywords": [
+		"astro-component",
+		"withastro",
+		"cloudflare-workers",
+		"homelab"
+	],
 	"type": "module",
 	"license": "MIT",
 	"author": "Sam Biondolillo",
